@@ -34,15 +34,15 @@ def save_json(data, save_path):
         json.dump(data.__dict__, f, ensure_ascii=False, indent=4)
 
 
-def save_experiment(args, score_df, fpr, tpr, f1_score, roc_auc, tpr_at_fpr_0_01):
+def save_experiment(conf, score_df, fpr, tpr, f1_score, roc_auc, tpr_at_fpr_0_01):
     fig, ax = plt.subplots(1, 1)
     ax.set_xscale("log")
 
     annotation = f"ROC AUC: {roc_auc:.4f}\nF1 Score: {f1_score:.2f}\nTPR at 0.01% FPR:{100 * tpr_at_fpr_0_01:.2f}%"
     display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, estimator_name=annotation)
     display.plot(ax=ax, linestyle="--")
-    ax.set_title(f"{args.dataset_name} (n={len(score_df)})\nMachine Text from {args.machine_text_source}")
+    ax.set_title(f"{conf.run_name} (n={len(score_df)})\nMachine Text from {conf.run_name}")
 
-    fig.savefig(f"{args.experiment_path}/performance.png", bbox_inches='tight')
-    score_df.to_csv(f"{args.experiment_path}/score_df.csv", index=False)
-    save_json(args, args.experiment_path)
+    fig.savefig(f"{conf.output_location}/performance.png", bbox_inches='tight')
+    score_df.to_csv(f"{conf.output_location}/score_df.csv", index=False)
+    save_json(conf, conf.output_location)
