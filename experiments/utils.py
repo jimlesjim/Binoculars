@@ -45,4 +45,4 @@ def save_experiment(conf, score_df, fpr, tpr, f1_score, roc_auc, tpr_at_fpr_0_01
 
     fig.savefig(f"{conf.output_location}/{conf.run_name}/performance.png", bbox_inches='tight')
     score_df.to_csv(f"{conf.output_location}/{conf.run_name}/score_df.csv", index=False)
-    save_json(conf, f"{conf.output_location}/{conf.run_name})
+    save_json(conf, f"{conf.output_location}/{conf.run_name}")
