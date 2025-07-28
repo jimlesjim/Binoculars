@@ -43,6 +43,6 @@ def save_experiment(conf, score_df, fpr, tpr, f1_score, roc_auc, tpr_at_fpr_0_01
     display.plot(ax=ax, linestyle="--")
     ax.set_title(f"{conf.run_name} (n={len(score_df)})\nMachine Text from {conf.run_name}")
 
-    fig.savefig(f"{conf.output_location}/performance.png", bbox_inches='tight')
-    score_df.to_csv(f"{conf.output_location}/score_df.csv", index=False)
-    save_json(conf, conf.output_location)
+    fig.savefig(f"{conf.output_location}/{conf.run_name}/performance.png", bbox_inches='tight')
+    score_df.to_csv(f"{conf.output_location}/{conf.run_name}/score_df.csv", index=False)
+    save_json(conf, f"{conf.output_location}/{conf.run_name})
